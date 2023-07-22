@@ -1,3 +1,9 @@
 [submodule "lib/sismo-connect-solidity"]
 	path = lib/sismo-connect-solidity
 	url = https://github.com/sismo-core/sismo-connect-solidity
+[submodule "lib/eas-contracts"]
+	path = lib/eas-contracts
+	url = https://github.com/ethereum-attestation-service/eas-contracts
+[submodule "lib/dev-quickstart-oov3"]
+	path = lib/dev-quickstart-oov3
+	url = https://github.com/UMAprotocol/dev-quickstart-oov3

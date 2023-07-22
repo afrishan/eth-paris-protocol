@@ -47,7 +47,7 @@ const getAttester = async (uid, providerUrl = provider, EASContractAddress = EAS
 
 const createOnchainAttestation = async (signerUrl, schema = "string ReviewTitle,string TimeAtCompany,uint8 YearsOfExperience,uint32 Salary,bool Bonus,string SummaryOfExperience", schemaUID = "0x4afe77c8ec03225280bfb1ceeab33d68e4d1504e0b23272960cc0485f8a18e1b", recipient_, EASContractAddress) => {
     try {
-        const signer = new ethers.Wallet(privateKey, new ethers.JsonRpcProvider(signerUrl));
+        const signer = new ethers.Wallet(privateKey, new ethers.providers.JsonRpcProvider(signerUrl));
         const eas = new EAS(EASContractAddress);
         eas.connect(signer);
         const schemaEncoder = new SchemaEncoder(schema);

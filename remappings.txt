@@ -1,3 +1,6 @@
 ds-test/=lib/forge-std/lib/ds-test/src/
 forge-std/=lib/forge-std/src/
 sismo-connect-solidity/=lib/sismo-connect-solidity/src/
+ethereum-attestation-service/=lib/ethereum-attestation-service/src/
+ethereum-attestation-service/=lib/ethereum-attestation-service/src/
+UMAprotocol/=lib/dev-quickstart-oov3/src

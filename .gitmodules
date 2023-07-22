@@ -4,3 +4,6 @@
 [submodule "lib/eas-contracts"]
 	path = lib/eas-contracts
 	url = https://github.com/ethereum-attestation-service/eas-contracts
+[submodule "lib/dev-quickstart-oov3"]
+	path = lib/dev-quickstart-oov3
+	url = https://github.com/UMAprotocol/dev-quickstart-oov3

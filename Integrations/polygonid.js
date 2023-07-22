@@ -32,14 +32,14 @@ const createProfile = async (did) => {
 
 const issueClaim = async (did, UserID) => {
     const requestBody = {
-        schema: 'ipfs://QmcvSh2Qpqh917NtosTJw4PCJJ5zEBeMmvhhShrcjFrPTa',
+        schema: 'https://api.jsonbin.io/v3/qs/64bc55f98e4aa6225ec1fb4d',
         claims: [ 'id' ],
         credentialOptions: {
             anchor: false,
             persist: false,
             emailMessage: '',
             credential: {
-                schema: 'ipfs://QmcvSh2Qpqh917NtosTJw4PCJJ5zEBeMmvhhShrcjFrPTa',
+                schema: 'https://api.jsonbin.io/v3/qs/64bc55f98e4aa6225ec1fb4d',
                 issuer: did,
                 name: 'UID',
                 type: [ "VerifiableCredential" ],
@@ -52,9 +52,10 @@ const issueClaim = async (did, UserID) => {
     };
 
     const claim = await axios.post(`${baseUrl}/credentials/request-claims`, requestBody, axiosHeaders);
-    console.log(claim)
+    console.log(claim.data)
     return claim
 };
 
 
-console.log(issueClaim("eyJzY29wZXMiOlsidGVzdCIsImFsbCJdLCJzdWIiOiI5NDczIiwiaWF0IjoxNjkwMDQxNjUxLCJleHAiOjQ3NjkzMzc2NTF9.UN1tVxAWNqJj-ATELwJAHeHTWxx9MoMI4g-OIeU3u7zSAkdqpWNs05K5JPlrHnlGddDjm6_CvXS13ormNFJ17g", "x1"))
+console.log(issueClaim("did:polygonid:polygon:mumbai:2qH6jB3zwCssVqKc6435tssPk9qcm9KZ1cc5YTYic4", "x2"))
+// console.log(issueDid())

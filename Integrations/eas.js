@@ -3,14 +3,11 @@ const { ethers } = require('ethers');
 
 const provider= "https://eth-sepolia.public.blastapi.io"
 const EASContract = "0xC2679fBD37d54388Ce493F1DB75320D236e1815e"
-const SchemaContract = "0x0a7E2Ff54e76B8E6659aedc9103FB21c038050D0"
 const privateKey = "0x1a87834cd2f80898b07ec6207d3b55fbafda432c95c65764f5da972fda1c3bec"
-
-var parityReceipt;
 
 const getAttestation = async (uid, providerUrl = provider, EASContractAddress = EASContract) => {
     try {
-        const provider = new ethers.JsonRpcProvider(providerUrl);
+        const provider = new ethers.providers.JsonRpcProvider(providerUrl);
         const eas = new EAS(EASContractAddress);
         eas.connect(provider);
         return await eas.getAttestation(uid);
@@ -93,15 +90,15 @@ const createOnchainAttestation = async (signerUrl, schema = "string ReviewTitle,
     console.log(`Created attestation with uid: ${attestationUID}`);
 
     // // // Retrieve attestation details
-    // const attestation = await getAttestation(attestationUID, provider, EASContract);
-    // console.log(`Retrieved attestation: ${attestation}`);
+    const attestation = await getAttestation(attestationUID, provider, EASContract);
+    console.log(`Retrieved attestation: ${attestation}`);
 
     // // // // Retrieve attestation recipient
-    // const attestationRecipient = await getAttestationRecipient(attestationUID, provider, EASContract);
-    // console.log(`Retrieved attestation recipient: ${attestationRecipient}`);
+    const attestationRecipient = await getAttestationRecipient(attestationUID, provider, EASContract);
+    console.log(`Retrieved attestation recipient: ${attestationRecipient}`);
 
     // // // // Retrieve attester
-    // const attester = await getAttester(attestationUID, provider, EASContract);
-    // console.log(`Retrieved attester: ${attester}`);
+    const attester = await getAttester(attestationUID, provider, EASContract);
+    console.log(`Retrieved attester: ${attester}`);
 
 })().catch(console.error);

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.20;
-
+pragma solidity ^0.8.13;
 
 contract TransparenceProtocol {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -30,24 +29,9 @@ contract TransparenceProtocol {
     /*                              VIEW                          */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    function domainSeparator() public view returns (bytes32) {
-        return _domainSeparator();
-    }
-
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                          OVERRIDES                         */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    function _domainNameAndVersion()
-        internal
-        pure
-        virtual
-        override
-        returns (string memory _name, string memory _version)
-    {
-        _name = name;
-        _version = version;
-    }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      EXTERNAL FUNCTIONS                    */

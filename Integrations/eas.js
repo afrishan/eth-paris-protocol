@@ -1,9 +1,9 @@
-const { EAS, SchemaEncoder, SchemaRegistry } = require("@ethereum-attestation-service/eas-sdk");
+const { EAS, SchemaEncoder } = require("@ethereum-attestation-service/eas-sdk");
 const { ethers } = require('ethers');
 
 const provider= "https://eth-sepolia.public.blastapi.io"
 const EASContract = "0xC2679fBD37d54388Ce493F1DB75320D236e1815e"
-const privateKey = "0x1a87834cd2f80898b07ec6207d3b55fbafda432c95c65764f5da972fda1c3bec"
+const privateKey = process.env.PRIVATE_KEY
 
 const getAttestation = async (uid, providerUrl = provider, EASContractAddress = EASContract) => {
     try {
@@ -78,27 +78,29 @@ const createOnchainAttestation = async (signerUrl, schema = "string ReviewTitle,
     }
 }
 
+export { createOnchainAttestation, getAttestation, getAttestationRecipient, getAttester }
 
-(async function() {
-    // Define schema and related variables
-    const schema = "string ReviewTitle,string TimeAtCompany,uint8 YearsOfExperience,uint32 Salary,bool Bonus,string SummaryOfExperience";  // Replace with actual schema
-    const recipient = "0x2Db84F933bFd5b101fc6Eaaa850d6C0596A484B2";  // Replace with actual recipient address
-    const schemaID = "0x4afe77c8ec03225280bfb1ceeab33d68e4d1504e0b23272960cc0485f8a18e1b"
 
-    // Create an on-chain attestation
-    const attestationUID = await createOnchainAttestation(provider, schema, schemaID, recipient, EASContract);
-    console.log(`Created attestation with uid: ${attestationUID}`);
+// (async function() {
+//     // Define schema and related variables
+//     const schema = "string ReviewTitle,string TimeAtCompany,uint8 YearsOfExperience,uint32 Salary,bool Bonus,string SummaryOfExperience";  // Replace with actual schema
+//     const recipient = "0x2Db84F933bFd5b101fc6Eaaa850d6C0596A484B2";  // Replace with actual recipient address
+//     const schemaID = "0x4afe77c8ec03225280bfb1ceeab33d68e4d1504e0b23272960cc0485f8a18e1b"
 
-    // // // Retrieve attestation details
-    const attestation = await getAttestation(attestationUID, provider, EASContract);
-    console.log(`Retrieved attestation: ${attestation}`);
+//     // Create an on-chain attestation
+//     const attestationUID = await createOnchainAttestation(provider, schema, schemaID, recipient, EASContract);
+//     console.log(`Created attestation with uid: ${attestationUID}`);
 
-    // // // // Retrieve attestation recipient
-    const attestationRecipient = await getAttestationRecipient(attestationUID, provider, EASContract);
-    console.log(`Retrieved attestation recipient: ${attestationRecipient}`);
+//     // // // Retrieve attestation details
+//     const attestation = await getAttestation(attestationUID, provider, EASContract);
+//     console.log(`Retrieved attestation: ${attestation}`);
 
-    // // // // Retrieve attester
-    const attester = await getAttester(attestationUID, provider, EASContract);
-    console.log(`Retrieved attester: ${attester}`);
+//     // // // // Retrieve attestation recipient
+//     const attestationRecipient = await getAttestationRecipient(attestationUID, provider, EASContract);
+//     console.log(`Retrieved attestation recipient: ${attestationRecipient}`);
 
-})().catch(console.error);
+//     // // // // Retrieve attester
+//     const attester = await getAttester(attestationUID, provider, EASContract);
+//     console.log(`Retrieved attester: ${attester}`);
+
+// })().catch(console.error);

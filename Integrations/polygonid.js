@@ -2,10 +2,10 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config(); // this will load environment variables from a .env file into process.env
 
-
+const DID = "did:polygonid:polygon:mumbai:2qH6jB3zwCssVqKc6435tssPk9qcm9KZ1cc5YTYic4"
 const axiosHeaders = {
     headers: {
-      'DOCK-API-TOKEN': "eyJzY29wZXMiOlsidGVzdCIsImFsbCJdLCJzdWIiOiI5NDczIiwiaWF0IjoxNjkwMDQxNjUxLCJleHAiOjQ3NjkzMzc2NTF9.UN1tVxAWNqJj-ATELwJAHeHTWxx9MoMI4g-OIeU3u7zSAkdqpWNs05K5JPlrHnlGddDjm6_CvXS13ormNFJ17g"
+      'DOCK-API-TOKEN': process.env.PRIVATE_KEY
     },
   };
 
@@ -57,5 +57,7 @@ const issueClaim = async (did, UserID) => {
 };
 
 
-console.log(issueClaim("did:polygonid:polygon:mumbai:2qH6jB3zwCssVqKc6435tssPk9qcm9KZ1cc5YTYic4", "x2"))
+export { issueClaim, issueDid, createProfile, DID }
+
+// console.log(issueClaim(DID, "x2"))
 // console.log(issueDid())

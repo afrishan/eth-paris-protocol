@@ -1,11 +1,19 @@
-import { ethers } from 'ethers';
-import abi from './YourContractABI.json';
+const ethers = require('ethers');
 
-const createContractInstance = (contractAddress, providerOrSigner) => {
-  return new ethers.Contract(contractAddress, abi, providerOrSigner);
-};
+// const createContractInstance = (contractAddress, providerOrSigner) => {
+//   return new ethers.Contract(contractAddress, abi, providerOrSigner);
+// };
 
-export const getData = async (provider, contractAddress, assertionId) => {
+const createContractInstance = (contractAddress="0x6D865795C1Cf73ef8CD5bE685B06e896A73A25eB", privateKey= process.env.PRIVATE_KEY, providerUrl="https://eth-goerli.g.alchemy.com/v2/b2d3ZxjLwwS0SdoF7bcwNnkmRzfR2BXh") => {
+    const provider = new ethers.providers.JsonRpcProvider(providerUrl);
+    const wallet = new ethers.Wallet(privateKey, provider);
+
+    const functionSignature = 'function assertTruthWithDefaults(bytes calldata claim, address asserter) external returns (bytes32)';
+    const iface = new ethers.utils.Interface([functionSignature]);
+    return new ethers.Contract(contractAddress, iface, wallet);
+  };
+
+const getData = async (provider="https://eth-goerli.g.alchemy.com/v2/b2d3ZxjLwwS0SdoF7bcwNnkmRzfR2BXh", contractAddress="0x6D865795C1Cf73ef8CD5bE685B06e896A73A25eB", assertionId) => {
     try {
         const contract = createContractInstance(contractAddress, provider);
         return await contract.getData(assertionId);
@@ -15,31 +23,25 @@ export const getData = async (provider, contractAddress, assertionId) => {
     }
 };
 
-export const assertDataFor = async (signer, contractAddress, dataId, data, asserter) => {
+const assertTruth = async (data=ethers.utils.formatBytes32String("I pay my employees fairly 1"), asserter="0x2Db84F933bFd5b101fc6Eaaa850d6C0596A484B2") => {
     try {
-      const contract = createContractInstance(contractAddress, signer);
-      const transaction = await contract.assertDataFor(dataId, data, asserter);
+      const contract = createContractInstance();
+      const transaction = await contract.assertTruthWithDefaults(data, asserter, {
+        gasLimit: "2000000",
+        gasPrice: "2000000000"
+      });
       const receipt = await transaction.wait();
   
-      const dataAssertedEvent = receipt.events?.find(e => e.event === 'DataAsserted');
+      const AssertionId = receipt.events[2].topics[0];
+      return AssertionId;
       
-      if (dataAssertedEvent && dataAssertedEvent.args) {
-        return {
-          dataId: dataAssertedEvent.args.dataId,
-          data: dataAssertedEvent.args.data,
-          asserter: dataAssertedEvent.args.asserter,
-          assertionId: dataAssertedEvent.args.assertionId,
-        };
-      } else {
-        throw new Error(`No 'DataAsserted' event found in the transaction receipt`);
-      }
     } catch (error) {
       console.error(`Failed to assert data: ${error}`);
       throw error;  // Re-throw the error after logging it
     }
   };
 
-export const assertionResolvedCallback = async (signer, contractAddress, assertionId, assertedTruthfully) => {
+const assertionResolvedCallback = async (signer, contractAddress, assertionId, assertedTruthfully) => {
     try {
         const contract = createContractInstance(contractAddress, signer);
         const transaction = await contract.assertionResolvedCallback(assertionId, assertedTruthfully);
@@ -51,7 +53,7 @@ export const assertionResolvedCallback = async (signer, contractAddress, asserti
     }
 };
 
-export const assertionDisputedCallback = async (signer, contractAddress, assertionId) => {
+const assertionDisputedCallback = async (signer, contractAddress, assertionId) => {
     try {
         const contract = createContractInstance(contractAddress, signer);
         const transaction = await contract.assertionDisputedCallback(assertionId);
@@ -62,3 +64,5 @@ export const assertionDisputedCallback = async (signer, contractAddress, asserti
         throw error;  // Re-throw the error after logging it
     }
 };
+
+export { assertTruth, getData }

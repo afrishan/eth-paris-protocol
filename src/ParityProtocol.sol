@@ -3,6 +3,7 @@ pragma solidity ^0.8.13;
 
 import "sismo-connect-solidity/SismoConnectLib.sol";
 
+
 contract ParityProtocol is SismoConnect {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                          STRUCTS                           */

@@ -3,6 +3,10 @@
 ## Project Description
 Think Glassdoor but decentralised and truly privacy preserving.
 
+- Video Submission - https://youtu.be/dRPc4wQTQPY
+- Frontend design -  https://www.figma.com/file/KcD1bxvePfVcXvo0tUDrkc/Parity-Website-UI?type=design&node-id=0%3A1&mode=design&t=LNKUDEY2wuLeljgc-1
+
+
 ## Introduction 
 As the global workforce continues to grow, jobseekers look for authentic insights to make informed career decisions. Parity is on a mission to empower individuals while safeguarding their privacy through the application of zk technology. With Parity we welcome a new era of transparency, where employees can attest or dispute their fair pay, all while remaining truly anonymous.
 

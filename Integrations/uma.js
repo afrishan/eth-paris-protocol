@@ -4,7 +4,7 @@ const ethers = require('ethers');
 //   return new ethers.Contract(contractAddress, abi, providerOrSigner);
 // };
 
-const createContractInstance = (contractAddress="0x6D865795C1Cf73ef8CD5bE685B06e896A73A25eB", privateKey= process.env.PRIVATE_KEY, providerUrl="https://eth-goerli.g.alchemy.com/v2/b2d3ZxjLwwS0SdoF7bcwNnkmRzfR2BXh") => {
+const createContractInstance = (contractAddress="0x6D865795C1Cf73ef8CD5bE685B06e896A73A25eB", privateKey=process.env.PRIVATE_KEY, providerUrl="https://eth-goerli.g.alchemy.com/v2/b2d3ZxjLwwS0SdoF7bcwNnkmRzfR2BXh") => {
     const provider = new ethers.providers.JsonRpcProvider(providerUrl);
     const wallet = new ethers.Wallet(privateKey, provider);
 
@@ -65,4 +65,4 @@ const assertionDisputedCallback = async (signer, contractAddress, assertionId) =
     }
 };
 
-export { assertTruth, getData }
+(async function() {await assertTruth()})()

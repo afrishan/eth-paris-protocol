@@ -34,7 +34,6 @@ module.exports = async (req, res) => {
 };
 
 // assertTruth.js
-
 const createContractInstance = require('./createContractInstance');
 
 module.exports = async (req, res) => {

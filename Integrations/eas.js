@@ -78,29 +78,29 @@ const createOnchainAttestation = async (signerUrl, schema = "string ReviewTitle,
     }
 }
 
-export { createOnchainAttestation, getAttestation, getAttestationRecipient, getAttester }
+// export { createOnchainAttestation, getAttestation, getAttestationRecipient, getAttester }
 
 
-// (async function() {
-//     // Define schema and related variables
-//     const schema = "string ReviewTitle,string TimeAtCompany,uint8 YearsOfExperience,uint32 Salary,bool Bonus,string SummaryOfExperience";  // Replace with actual schema
-//     const recipient = "0x2Db84F933bFd5b101fc6Eaaa850d6C0596A484B2";  // Replace with actual recipient address
-//     const schemaID = "0x4afe77c8ec03225280bfb1ceeab33d68e4d1504e0b23272960cc0485f8a18e1b"
+(async function() {
+    // Define schema and related variables
+    const schema = "string ReviewTitle,string TimeAtCompany,uint8 YearsOfExperience,uint32 Salary,bool Bonus,string SummaryOfExperience";  // Replace with actual schema
+    const recipient = "0x2Db84F933bFd5b101fc6Eaaa850d6C0596A484B2";  // Replace with actual recipient address
+    const schemaID = "0x4afe77c8ec03225280bfb1ceeab33d68e4d1504e0b23272960cc0485f8a18e1b"
 
-//     // Create an on-chain attestation
-//     const attestationUID = await createOnchainAttestation(provider, schema, schemaID, recipient, EASContract);
-//     console.log(`Created attestation with uid: ${attestationUID}`);
+    // Create an on-chain attestation
+    const attestationUID = await createOnchainAttestation(provider, schema, schemaID, recipient, EASContract);
+    console.log(`Created attestation with uid: ${attestationUID}`);
 
-//     // // // Retrieve attestation details
-//     const attestation = await getAttestation(attestationUID, provider, EASContract);
-//     console.log(`Retrieved attestation: ${attestation}`);
+    // // // Retrieve attestation details
+    const attestation = await getAttestation(attestationUID, provider, EASContract);
+    console.log(`Retrieved attestation: ${attestation}`);
 
-//     // // // // Retrieve attestation recipient
-//     const attestationRecipient = await getAttestationRecipient(attestationUID, provider, EASContract);
-//     console.log(`Retrieved attestation recipient: ${attestationRecipient}`);
+    // // // // Retrieve attestation recipient
+    const attestationRecipient = await getAttestationRecipient(attestationUID, provider, EASContract);
+    console.log(`Retrieved attestation recipient: ${attestationRecipient}`);
 
-//     // // // // Retrieve attester
-//     const attester = await getAttester(attestationUID, provider, EASContract);
-//     console.log(`Retrieved attester: ${attester}`);
+    // // // // Retrieve attester
+    const attester = await getAttester(attestationUID, provider, EASContract);
+    console.log(`Retrieved attester: ${attester}`);
 
-// })().catch(console.error);
+})().catch(console.error);

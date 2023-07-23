@@ -2,7 +2,7 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config(); // this will load environment variables from a .env file into process.env
 
-const DID = "did:polygonid:polygon:mumbai:2qH6jB3zwCssVqKc6435tssPk9qcm9KZ1cc5YTYic4"
+
 const axiosHeaders = {
     headers: {
       'DOCK-API-TOKEN': process.env.PRIVATE_KEY
@@ -57,7 +57,7 @@ const issueClaim = async (did, UserID) => {
 };
 
 
-export { issueClaim, issueDid, createProfile, DID }
+export { issueClaim, issueDid, createProfile, DiD }
 
-// console.log(issueClaim(DID, "x2"))
+console.log(issueClaim("did:polygonid:polygon:mumbai:2qH6jB3zwCssVqKc6435tssPk9qcm9KZ1cc5YTYic4", "x2"))
 // console.log(issueDid())
